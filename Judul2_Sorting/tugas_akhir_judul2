@@ -1,0 +1,67 @@
+# ================================================================
+# Nama            : ABDU AR RAHMAN ATHALLAH
+# NPM             : 2515061002
+# Judul Program   : Sistem Pengurutan Harga Kopi Coffee Shop
+# Struktur Data   : Array (List) dan Sorting (Insertion Sort)
+# Deskripsi       : Program ini digunakan untuk menginput data kopi
+#                   berupa nama dan harga, kemudian menampilkan daftar
+#                   kopi sebelum dan setelah diurutkan.
+#                   Proses pengurutan menggunakan metode Insertion Sort
+#                   berdasarkan harga kopi dari yang termurah hingga
+#                   termahal.
+# ================================================================
+
+def insertion_sort_kopi(data_kopi, n):
+    for i in range(1, n):
+        temp = data_kopi[i]
+        j = i - 1
+
+        # Bandingkan berdasarkan harga kopi
+        while j >= 0 and data_kopi[j]["harga"] > temp["harga"]:
+            data_kopi[j + 1] = data_kopi[j]
+            j -= 1
+
+        data_kopi[j + 1] = temp
+
+
+def main():
+    print("=== Sistem Pengurutan Harga Kopi Coffee Shop ===")
+
+    try:
+        n = int(input("Masukkan jumlah kopi: "))
+    except ValueError:
+        print("Input tidak valid! Jumlah kopi harus berupa angka.")
+        return
+
+    data_kopi = []
+
+    for i in range(n):
+        print(f"\nData kopi ke-{i + 1}")
+
+        nama = input("Masukkan nama kopi: ")
+
+        while True:
+            try:
+                harga = int(input("Masukkan harga kopi: Rp "))
+                break
+            except ValueError:
+                print("Input tidak valid! Harga harus berupa angka.")
+
+        data_kopi.append({
+            "nama": nama,
+            "harga": harga
+        })
+
+    print("\nDaftar kopi sebelum diurutkan:")
+    for kopi in data_kopi:
+        print(f"{kopi['nama']} - Rp {kopi['harga']}")
+
+    insertion_sort_kopi(data_kopi, n)
+
+    print("\nDaftar kopi setelah diurutkan dari termurah ke termahal:")
+    for kopi in data_kopi:
+        print(f"{kopi['nama']} - Rp {kopi['harga']}")
+
+
+if __name__ == "__main__":
+    main()
